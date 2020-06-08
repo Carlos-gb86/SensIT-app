@@ -10,7 +10,7 @@ export const sendConnectNotif = (projectId) => {
       const check = await checkNotifSent(projectId, receiverId); // Check if receiver already has a notification for that project
 
       if (check.length < 1) {
-        const url = `http://127.0.0.1:3000/api/v1/projects/${projectId}/users/${receiverId}/notifications`;
+        const url = `/api/v1/projects/${projectId}/users/${receiverId}/notifications`;
 
         try {
           const res = await axios({
@@ -44,7 +44,7 @@ export const sendConnectNotif = (projectId) => {
 };
 
 const checkNotifSent = async (projectId, receiverId) => {
-  const url = `http://127.0.0.1:3000/api/v1/notifications?receiver=${receiverId}&project=${projectId}`;
+  const url = `/api/v1/notifications?receiver=${receiverId}&project=${projectId}`;
 
   const res = await axios({
     method: 'GET',

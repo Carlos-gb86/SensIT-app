@@ -7,7 +7,7 @@ export const handleNotifications = () => {
     const Button = event.target.closest('a');
     const closeButton = event.target.closest('svg');
 
-    const url = `http://127.0.0.1:3000/api/v1/`;
+    const url = `/api/v1/`;
 
     if (closeButton) {
       if (closeButton.classList.contains('notif-item__close-btn')) {
@@ -54,8 +54,8 @@ export const handleNotifications = () => {
             );
           }
         } catch (err) {
-          //showAlert('error', err.response.data.message, 'cancel');
-          console.log(err);
+          showAlert('error', err.response.data.message, 'cancel');
+          //console.log(err);
         }
       }
     }

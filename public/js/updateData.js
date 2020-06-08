@@ -10,7 +10,7 @@ export const updateData = async (formItem, type) => {
     let url;
 
     if (type === 'profile') {
-      url = 'http://127.0.0.1:3000/api/v1/users/updateMe';
+      url = '/api/v1/users/updateMe';
       form.append('name', document.getElementById('name').value);
       form.append('email', document.getElementById('email').value);
       document.getElementById('company').value
@@ -25,7 +25,7 @@ export const updateData = async (formItem, type) => {
     if (type === 'password') {
       document.querySelector('.settings__form--btn').textContent =
         'Saving password...';
-      url = 'http://127.0.0.1:3000/api/v1/users/updateMyPassword';
+      url = '/api/v1/users/updateMyPassword';
       form.append(
         'passwordCurrent',
         document.getElementById('old-password').value

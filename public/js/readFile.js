@@ -13,7 +13,7 @@ export const importData = async (path) => {
   //   count += 1;
   // }
 
-  const url = `http://127.0.0.1:3000/api/v1/projects/getSensorData/`;
+  const url = `/api/v1/projects/getSensorData/`;
 
   try {
     const res = await axios({
@@ -32,7 +32,7 @@ export const importData = async (path) => {
     }
   } catch (err) {
     showAlert('error', err.response.data.message, 'cancel');
-    console.log(err);
+    //console.log(err);
   }
 
   // Object.keys(sensorData).forEach((key) => {

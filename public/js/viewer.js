@@ -236,7 +236,7 @@ export const uploadBimModelFile = (form, projectId) => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const url = `http://127.0.0.1:3000/api/v1/projects/uploadBimModelFile/${projectId}`;
+    const url = `/api/v1/projects/uploadBimModelFile/${projectId}`;
     const form = new FormData();
 
     if (document.getElementById('bimModel-upload').files[0])
@@ -260,7 +260,7 @@ export const uploadBimModelFile = (form, projectId) => {
       }
     } catch (err) {
       showAlert('error', err.response.data.message, 'cancel');
-      console.log(err.response.data.message);
+      //console.log(err.response.data.message);
     }
   });
 };
@@ -278,7 +278,7 @@ export const uploadSensorData = (uploadBtn, projectId) => {
     const file = event.target.files[0];
     const content = await getFileContent(file);
 
-    const url = `http://127.0.0.1:3000/api/v1/projects/${projectId}`;
+    const url = `/api/v1/projects/${projectId}`;
     const form = new FormData();
     form.append('sensors', content);
 
@@ -294,7 +294,7 @@ export const uploadSensorData = (uploadBtn, projectId) => {
       }
     } catch (err) {
       showAlert('error', err.response.data.message, 'cancel');
-      console.log(err);
+      //console.log(err);
     }
   });
 };
@@ -338,12 +338,10 @@ export const writeAndDownloadFile = async (sensorData, sensors) => {
     data = sensorData.find((sensor) => (sensor.id = sensorId));
   }
 
-  const url = `http://127.0.0.1:3000`;
-
   try {
     const res = await axios({
       method: 'POST',
-      url: `${url}/writeTempFile`,
+      url: `/writeTempFile`,
       data: {
         extension,
         delimiter,
@@ -358,10 +356,10 @@ export const writeAndDownloadFile = async (sensorData, sensors) => {
         'checkmark'
       );
 
-      window.open(`${url}/download/${res.data.filename}`);
+      window.open(`/download/${res.data.filename}`);
     }
   } catch (err) {
     showAlert('error', err.response.data.message, 'cancel');
-    console.log(err);
+    //console.log(err);
   }
 };

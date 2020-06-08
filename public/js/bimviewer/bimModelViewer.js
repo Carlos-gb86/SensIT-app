@@ -240,8 +240,6 @@ export const runBIM = (filename, contourFile, param) => {
       });
 
     folder.open();
-
-    console.log(folder);
   }
 
   // ************ Animate Function ************************//

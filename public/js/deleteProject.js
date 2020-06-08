@@ -16,7 +16,7 @@ export const showDeleteOptions = (deleteBtn) => {
 
     confirmBtn.addEventListener('click', async () => {
       const projectId = document.getElementById('name').dataset.sensitProjectid;
-      const url = `http://127.0.0.1:3000/api/v1/projects/${projectId}`;
+      const url = `/api/v1/projects/${projectId}`;
       try {
         const res = await axios({
           method: 'DELETE',

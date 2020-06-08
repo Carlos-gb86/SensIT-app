@@ -13,9 +13,7 @@ export const openUserSearch = async (event, userSearchMenu) => {
       const projectId = clickedButton.closest('.project-item').dataset
         .sensitProject;
 
-      const project = await getProject(
-        `http://127.0.0.1:3000/api/v1/projects/${projectId}`
-      );
+      const project = await getProject(`/api/v1/projects/${projectId}`);
 
       if (!project.public) {
         // The user search menu is displayed only if the project is not public
@@ -100,7 +98,7 @@ const updateUserList = (users) => {
 const buildQueryUrl = (searchField) => {
   // Retrieve data from search input field
   const searchString = searchField.value;
-  var url = 'http://127.0.0.1:3000/api/v1/users?';
+  var url = '/api/v1/users?';
 
   // Prepare URL for query
   if (searchString) url = url.concat(`userQuery=${searchString}`);

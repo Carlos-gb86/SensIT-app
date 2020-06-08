@@ -66,7 +66,7 @@ const buildQueryUrl = (searchField, searchSwitch, sortString) => {
   var material;
   var year;
   var condition;
-  var url = 'http://127.0.0.1:3000/api/v1/projects?';
+  var url = '/api/v1/projects?';
 
   // Retrieve data from advanced search
   if (!searchSwitch.classList.contains('switch-color-red')) {

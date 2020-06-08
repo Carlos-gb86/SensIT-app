@@ -2,7 +2,6 @@
 
 export const changeTab = (profileTab, settingsTab) => {
   profileTab.addEventListener('click', (event) => {
-    console.log('here!');
     if (!profileTab.classList.contains('user-tab--active')) {
       settingsTab.classList.remove('user-tab--active');
       profileTab.classList.add('user-tab--active');

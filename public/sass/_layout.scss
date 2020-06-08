@@ -1,5 +1,6 @@
 .container {
-  max-width: 122rem;
+  min-width: 60rem;
+  max-width: 80%;
   margin: 0 auto;
   background-color: var(--color-grey-light-1);
   box-shadow: var(--shadow-dark);

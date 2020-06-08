@@ -81,7 +81,7 @@ export const plotData = async (
                 maxRotation: 0,
                 autoskip: true,
                 callback: function (value, index, values) {
-                  return Math.round(value * 100);
+                  return Math.round(value * 100) / 100;
                 },
               },
             },

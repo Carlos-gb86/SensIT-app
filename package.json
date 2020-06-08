@@ -6,7 +6,8 @@
   "scripts": {
     "watch:sass": "node-sass public/sass/main.scss public/css/style.css -w",
     "devserver": "live-server",
-    "start": "nodemon server.js -e js,json,pug,html,css",
+    "start": "node server.js",
+    "start:dev": "nodemon server.js -e js,json,pug,html,css",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "compile:sass": "node-sass public/sass/main.scss public/css/style.comp.css",
     "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' public/css/style.comp.css -o public/css/style.prefix.css",

@@ -1,0 +1,37 @@
+extends base
+
+block content
+    .content
+        include _sidebar
+        main.workspace
+            .workspace__header
+                h3#workspace__title.workspace__title My account:
+            .panels
+                .panels__user
+                    .panels__user-tabs
+                        a(href="/profile")#profile-tab.user-tab 
+                            h2 PROFILE 
+                        a(href="/settings")#settings-tab.user-tab.user-tab--active   
+                            h2 SETTINGS 
+                    .settings
+                        h2 Change your password
+                        form.settings__form
+                            .settings__form--group
+                                label.settings__form--label(for="old-password") Old Password
+                                input#old-password.settings__form--input(type="password" placeholder="••••••••••••" required="" minlength="8")
+                                svg#old-password-icon.password-icon
+                                    use(xlink:href="/img/sprite.svg#icon-eye")
+                            .settings__form--group
+                                label.settings__form--label(for="new-password") New Password
+                                input#new-password.settings__form--input(type="password" placeholder="••••••••••••" required="" minlength="8")
+                                svg#new-password-icon.password-icon
+                                    use(xlink:href="/img/sprite.svg#icon-eye")
+                            .settings__form--group
+                                label.settings__form--label(for="confirm-new-password")
+                                    | Confirm New Password
+                                input#confirm-new-password.settings__form--input(type="password" placeholder="••••••••••••" required="" minlength="8")
+                                svg#confirm-new-password-icon.password-icon
+                                    use(xlink:href="/img/sprite.svg#icon-eye")
+                            .settings__form--group
+                                button.settings__form--btn Change password
+            

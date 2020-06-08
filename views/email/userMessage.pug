@@ -1,0 +1,8 @@
+extends baseEmail
+
+block content
+    p Hello Carlos,
+    p #{messageInfo.user.name} #{`<${messageInfo.user.email}>`} has sent the following message through the contact form:
+    p= messageInfo.subject
+    p= messageInfo.message
+        

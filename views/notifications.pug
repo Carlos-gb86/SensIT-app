@@ -1,0 +1,50 @@
+extends base
+
+block content
+    .content
+        include _sidebar
+        main.workspace
+            .workspace__header
+                h3#workspace__title.workspace__title My notifications:
+            .panels
+                .panels__notif
+                    .notif-list
+                        - if (notifications.length === 0)
+                            .notif-empty There are currently no notifications to display
+                        - if (notifications.length > 0)
+                            for notif in notifications
+                                - if ( notif.read === true) 
+                                    .notif-item(data-sensit-notification=`${notif.id}`)
+                                        svg.notif-item__close-btn
+                                            use(xlink:href="/img/sprite.svg#icon-cross")
+                                        span.notif-item__indicator.notif-read
+                                        .notif-item__sender
+                                            img(src="/img/users/default.jpg" alt="user-photo")
+                                        .notif-item__info
+                                            h4.notif-item__message.notif-read
+                                                strong= notif.sender.name
+                                                |  wants to collaborate on the 
+                                                strong= notif.project.name
+                                                |  project
+                                            .notif-item__opt
+                                                a.notif-item__btn--read Accept
+                                                a.notif-item__btn--read Decline
+                                - if ( notif.read === false) 
+                                    .notif-item(data-sensit-notification=`${notif.id}` data-sensit-project=`${notif.project.id}` data-sensit-user=`${notif.receiver}`)
+                                        svg.notif-item__close-btn
+                                            use(xlink:href="/img/sprite.svg#icon-cross")
+                                        span.notif-item__indicator  
+                                        .notif-item__sender
+                                            img(src="/img/users/default.jpg" alt="user-photo")
+                                        .notif-item__info
+                                            h4.notif-item__message
+                                                strong= notif.sender.name
+                                                |  wants to collaborate on the 
+                                                strong= notif.project.name
+                                                |  project
+                                            .notif-item__opt
+                                                a.notif-item__btn.notif-accept Accept
+                                                a.notif-item__btn.notif-decline Decline
+                                    
+
+            

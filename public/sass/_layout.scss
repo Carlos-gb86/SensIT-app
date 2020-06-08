@@ -1,0 +1,48 @@
+.container {
+  max-width: 122rem;
+  margin: 0 auto;
+  background-color: var(--color-grey-light-1);
+  box-shadow: var(--shadow-dark);
+
+  //min-height: 50rem;
+}
+
+.header {
+  font-size: 1.6rem;
+  height: 5rem;
+  background-color: var(--color-grey-dark-1);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  min-height: calc(100vh - 8rem);
+}
+
+.sidebar {
+  background-color: var(--color-grey-dark-2);
+  width: 5.5rem;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.workspace {
+  background-color: var(--color-grey-light-1);
+  flex: 1 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  background-color: var(--color-grey-dark-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

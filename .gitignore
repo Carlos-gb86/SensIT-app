@@ -1,0 +1,16 @@
+node_modules/
+test/
+dev-data/
+.cache/
+*.env
+aboutUs.html
+contactUs.html
+create-project.html
+error.html
+index.html
+login.html
+notifications.html
+project.html
+signup.html
+user-account.html
+viewer.html

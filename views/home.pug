@@ -1,0 +1,99 @@
+extends base
+
+block content
+    .content
+        include _sidebar
+        main.workspace
+            .workspace__header
+                h3#workspace__title.workspace__title Home:
+                h4.workspace__message= `Welcome, ${user.name.split(' ')[0]}`
+            .workspace__search
+                form#projectSearch.search(action="#")
+                    input#searchField.search__input(type="text" placeholder="Search project...")
+                    button.search__button
+                        svg.search__icon
+                            use(xlink:href="/img/sprite.svg#icon-magnifying-glass")
+                // Advanced Search Menu Starts Here
+                #advanced-search.advanced-search
+                    span Advanced Search
+                    svg#advanced-search--btn.advanced-search__icon.switch-color-red
+                        use(xlink:href="/img/sprite.svg#icon-switch")
+                #advanced-search-filters.filters.hide-menu
+                    .filters__type
+                        p.filters__label Material:
+                        select#material-filter.filters__dropdown(name="Type")
+                            option(value="All" selected="") All
+                            option(value="concrete") Concrete
+                            option(value="steel") Steel
+                            option(value="timber") Timber
+                            option(value="frp") FRP
+                            option(value="masonry") Masonry
+                            option(value="other") Other
+                    .filters__year
+                        p.filters__label Built after:
+                        input#year.filters__text-input(type="text" value="1975")
+                    .filters__slider
+                        input#year-range(type="range" name="Age" min="1900" max=`${new Date().getFullYear()}`)
+                    .filters__condition
+                        p.filters__label Condition:
+                        select#condition-filter.filters__dropdown(name="Condition")
+                            option(value="All" selected="")  All 
+                            option(value="critical")  Critical 
+                            option(value="poor") Poor
+                            option(value="acceptable") Acceptable
+                            option(value="good") Good
+                            option(value="excellent") Excellent
+            .panels
+                .panels__map
+                    - var locations = new Array(); projects.forEach( (project,i) => locations[i] = project.location.coordinates);
+                    - var names = new Array(); projects.forEach( (project,i) => names[i] = project.name);
+                    - var thumbnails = new Array(); projects.forEach( (project, i) => thumbnails[i] = project.thumbnail);
+                    #map(data-sensit-locations = `${JSON.stringify(locations)}` data-sensit-names = `${JSON.stringify(names)}` data-sensit-thumbnails = `${JSON.stringify(thumbnails)}`)
+                .panels__project-panel
+                    .project-panel__header
+                        h4.project-panel__title Project list
+                        svg#sort-btn.project-panel__icon
+                            use(xlink:href="/img/sprite.svg#icon-select-arrows")
+                    // Sort Menu Starts Here
+                    #sort-menu.sort-menu.hide-menu
+                        .sort-menu__item
+                            p.sort-menu__text  Project Name
+                            svg.sort-menu__icon
+                                use(xlink:href="/img/sprite.svg#icon-sort-alpha-asc")
+                        .sort-menu__item
+                            p.sort-menu__text  Project Type
+                            svg.sort-menu__icon
+                                use(xlink:href="/img/sprite.svg#icon-sort-alpha-asc")
+                        .sort-menu__item
+                            p.sort-menu__text  Structural Condition
+                            svg.sort-menu__icon
+                                use(xlink:href="/img/sprite.svg#icon-sort-amount-desc")
+                    .project-list
+                        for item in projects
+                            .project-item(data-sensit-project=`${item.id}`)
+                                .project-item__main
+                                    //-.project-item__condition.condition-excellent  
+                                    - conditions = ['critical', 'poor', 'acceptable', 'good', 'excellent']
+                                    div(class=`project-item__condition condition-${conditions[item.condition -1]}`)  
+                                    .project-item__text
+                                        .project-item__description
+                                            h3.project-item__name= item.name
+                                            .project-item__props
+                                                h4.project-item__type= item.type
+                                                h4.project-item__year= item.builtIn
+                                        svg.project-item__icon
+                                            use(xlink:href="/img/sprite.svg#icon-chevron-down")
+                                .project-item__menu.hide-project-item-menu
+                                    a.project-item__btn(href=`/project/${item.slug}`)
+                                        svg.project-item__btn-icon
+                                            use(xlink:href="/img/sprite.svg#icon-edit")
+                                        span.project-item__btn-text  Check 
+                                    a.project-item__btn.project-item__btn--share
+                                        svg.project-item__btn-icon
+                                            use(xlink:href="/img/sprite.svg#icon-share")
+                                        span.project-item__btn-text  Share 
+                                    a.project-item__btn(href=`/viewer/${item.slug}`)
+                                        svg.project-item__btn-icon
+                                            use(xlink:href="/img/sprite.svg#icon-eye")
+                                        span.project-item__btn-text  Inspect
+                        

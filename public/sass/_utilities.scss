@@ -1,0 +1,64 @@
+// Classes to toggle to show and hide elements
+.hide-menu {
+  padding: 0;
+  margin: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  height: 0;
+}
+
+.hide-project-item-menu {
+  transform: scaleY(0);
+  transform-origin: top;
+  height: 0;
+  margin: 0;
+
+  & > * {
+    height: 0;
+    margin: 0;
+    border: 0;
+    padding: 0;
+
+    & > * {
+      height: 0;
+      margin: 0;
+      font-size: 0;
+    }
+  }
+}
+
+.hide-user-menu {
+  // opacity: 0;
+  // visibility: hidden;
+  transform: scaleY(0) scaleX(0.25);
+  height: 0;
+  width: 0;
+  transform-origin: top right;
+}
+
+//Classes to change color / position dynamically
+
+.switch-color-red {
+  fill: orangered;
+  transform: scaleX(-1);
+}
+
+.flip-icon {
+  transform: scaleY(-1);
+}
+
+.condition-excellent {
+  background-image: radial-gradient(lime, limegreen);
+}
+.condition-good {
+  background-image: radial-gradient(rgb(191, 255, 62), rgb(162, 187, 53));
+}
+.condition-acceptable {
+  background-image: radial-gradient(yellow, goldenrod);
+}
+.condition-poor {
+  background-image: radial-gradient(rgb(255, 182, 47), rgb(228, 121, 0));
+}
+.condition-critical {
+  background-image: radial-gradient(rgb(255, 105, 51), rgb(189, 0, 0));
+}

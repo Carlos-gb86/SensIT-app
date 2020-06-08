@@ -1,0 +1,31 @@
+header.header
+    a.logo-box(href="/")
+        img.logo-box__img(src="/img/Logo-SensIT-Color.svg" alt="sensit logo")
+        span.logo-box__text SensIT | BIM Viewer
+    - if (user)
+    nav.user-nav
+        a.user-nav__icon-box(href="/notifications")
+            svg.user-nav__icon
+                use(xlink:href="/img/sprite.svg#icon-bell")
+            span.user-nav__notification= `${user.notifications}`
+        #user-menu--btn.user-nav__user
+            svg.user-nav__icon.user-nav__icon-user
+                use(xlink:href="/img/sprite.svg#icon-user-solid-circle")
+        // User Menu Starts Here
+        #user-menu.user-nav__menu.hide-user-menu
+            div
+                img.user-nav__photo(src=`/img/users/${user.photo}` alt="user photo")
+                h4.user-nav__user-name= `${user.name}`
+                    h5.user-nav__user-email= `${user.email}`
+            a(href="/profile")
+                svg.user-nav__menu--icon
+                    use(xlink:href="/img/sprite.svg#icon-new-message")
+                p Edit profile 
+            a(href="/settings")
+                svg.user-nav__menu--icon
+                    use(xlink:href="/img/sprite.svg#icon-cog")
+                p Settings 
+            a(id="logout-btn" href="#")
+                svg.user-nav__menu--icon
+                    use(xlink:href="/img/sprite.svg#icon-log-out")
+                p Sign out 

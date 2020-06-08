@@ -1,0 +1,13 @@
+extends baseEmail
+
+block content
+    p Hi #{firstName},
+    p Your message has been delivered successfully! We will look into it and give you an answer as soon as we can. 
+    p Until then, do not hesitate to contact us again if you any further questions.
+    p - Carlos Gil, SensIT Admin
+    p #========================================================
+    p Message from: #{messageInfo.user.name} #{`<${messageInfo.user.email}>`}
+    p Subject: #{messageInfo.subject}
+    p Message: 
+    p= messageInfo.message
+        

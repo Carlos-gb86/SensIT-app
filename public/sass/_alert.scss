@@ -1,0 +1,57 @@
+// Login alert
+
+.alert {
+  &__container {
+    background-color: var(--color-grey-light-1);
+    position: absolute;
+    height: 8rem;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 5px solid;
+    border-bottom: 5px solid;
+
+    &--success {
+      border-color: #20bf6b;
+    }
+    &--warning {
+      border-color: #ffbb00;
+    }
+    &--error {
+      border-color: #eb4d4b;
+    }
+  }
+
+  &__icon {
+    height: 6rem;
+    width: 6rem;
+    margin-right: 1rem;
+
+    &--success {
+      fill: #20bf6b;
+    }
+    &--warning {
+      fill: #ffbb00;
+    }
+
+    &--error {
+      fill: #eb4d4b;
+    }
+  }
+
+  &__message {
+    font-size: 2rem;
+    font-weight: 700;
+    &--success {
+      color: #20bf6b;
+    }
+    &--warning {
+      color: #ffbb00;
+    }
+    &--error {
+      color: #eb4d4b;
+    }
+  }
+}

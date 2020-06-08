@@ -1,0 +1,61 @@
+
+extends base
+
+include mixins/_sideNav
+
+block content
+    .content
+        include _sidebar
+        main.workspace
+            .workspace__header
+                - const nameUppercase = project.name[0].toUpperCase() +  project.name.slice(1); 
+                h3#workspace__title.workspace__title  Project Info:
+                h4.workspace__message= `${nameUppercase}` 
+            .panels
+                .panels__info
+                    .info__general
+                        .info__general--heading
+                            | General information
+                        form.general__form
+                            figure.info__general--thumbnail
+                                img.thumbnail-img(src=`/img/projects/${project.thumbnail}` alt="Project thumbnail")
+                                input.general__form--upload(type="file", accept="image/*", id="thumbnail" name="thumbnail", style="display: none")
+                                label.thumbnail-img--caption(for="thumbnail")
+                                    | Change photo
+                            h1#name(data-sensit-projectId=`${project._id}`)= nameUppercase
+                            .general__form--group
+                                label.general__form--label(for="type") Structural typology
+                                input#type.general__form--input(type="text" value=`${project.type}` required="" name="type")
+                            .general__form--group
+                                label.general__form--label(for="year") Year of construction
+                                input#year.general__form--input(type="text" value=`${project.builtIn}` required="" name="year")
+                            .general__form--group
+                                label.general__form--label(for="material") Main structural material
+                                input#material.general__form--input(type="text" value=`${project.material}` required="" name="material")
+                            .general__form--group
+                                label.general__form--label(for="owner") Owner
+                                - if(!project.owner || project.owner === 'undefined') project.owner="";
+                                input#owner.general__form--input(type="text" value=`${project.owner}` required="" name="owner")
+                            .general__form--group
+                                label.general__form--label(for="description") Description
+                                - if(!project.description || project.description === 'undefined') project.description="";
+                                textarea#description.general__form--input(name="description")= project.description
+                            .general__form--group
+                                button.general__form--btn Update project
+                    .info__details
+                        .info__details-block
+                            .info__details--heading
+                                | Condition information
+                            .info__details--content
+                                | This section is not available yet
+                        .info__details-block
+                            .info__details--heading
+                                | Inspection information
+                            .info__details--content
+                                | This section is not available yet
+            button#delete-btn.delete-btn Delete project
+            .modal-delete#modal-delete
+                .modal-delete--msg This action will permanently delete the current project. Are you sure you want to continue?
+                .modal-delete--options
+                    button.confirm-btn Yes, I'm sure!
+                    button.cancel-btn No, go back!

@@ -1,0 +1,76 @@
+extends base
+
+block content
+    .content
+        include _sidebar
+        main.workspace
+            .workspace__header
+                h3#workspace__title.workspace__title Create project:
+            .panels
+                .panels__new-project
+                    h2 Project Information
+                    form.new-project__form
+                        .new-project__form--group
+                            label.new-project__form--label(for="name") 
+                                | Name
+                                sup *
+                            input#name.new-project__form--input(type="text" placeholder="Name of the project" name="name" required="")
+                        .new-project__form--group
+                            label.new-project__form--label(for="type") 
+                                | Type of structure
+                                sup *
+                            input#type.new-project__form--input(type="text" placeholder="Type of structure" name="type" required="")
+                        .new-project__form--group
+                            label.new-project__form--label(for="material") 
+                                | Material
+                                sup *
+                            select#material.new-project__form--input(name="material" required="")
+                                option(value="" disabled="" selected="" hidden="") Select material...
+                                option(value="concrete") Concrete
+                                option(value="steel") Steel
+                                option(value="timber") Timber
+                                option(value="frp") FRP
+                                option(value="masonry") Masonry
+                                option(value="other") Other
+                        .new-project__form--group
+                            label.new-project__form--label(for="owner") Owner
+                            input#owner.new-project__form--input(type="text" placeholder="Owner of the structure" name="owner")
+                        .new-project__form--group
+                            label.new-project__form--label(for="city") City
+                            input#city.new-project__form--input(type="text" placeholder="City" name="city")
+                        .new-project__form--group
+                            label.new-project__form--label(for="country") Country
+                            input#country.new-project__form--input(type="text" placeholder="Country" name="country")
+                        .new-project__form--group
+                            label.new-project__form--label(for="coordinates") 
+                                | Coordinates
+                                sup *
+                            .new-project__form--group--coordinates
+                                input#coordinates--lat.new-project__form--input.coordinate(type="number" placeholder="Latitude" name="coordinates--lat" step="0.001" min="-90" max="90" required="")
+                                input#coordinates--lng.new-project__form--input.coordinate(type="number" placeholder="Longitude" name="coordinates--lng" step="0.001" min="-180" max="180" required="")
+                        .new-project__form--group
+                            label.new-project__form--label(for="constructionYear") 
+                                | Year of construction
+                                sup *
+                            input#constructionYear.new-project__form--input(type="number" placeholder="Year of construction" name="constructionYear" min="1900" max="2020" required="")
+                        .new-project__form--group
+                            label.new-project__form--label(for="description") Description
+                            textarea#description.new-project__form--input.description(type="text" placeholder="Description" name="description")
+                        .new-project__form--group
+                            .new-project__form--label(for="thumbnail") Project picture
+                            .new-project__form--input.new-project__file-upload
+                                label.new-project__form--upload-btn(for="thumbnail-upload") Upload file
+                                input#thumbnail-upload(type="file" )
+                                //- accept="image/*"
+                                span#thumbnail-name  No file selected
+                        .new-project__form--group
+                            label.new-project__form--label(for="public") Public
+                            .new-project__form--input.new-project__public
+                                input#public-checkbox(type="checkbox" name="public")
+                                svg.checkbox__icon
+                                    use(xlink:href="/img/sprite.svg#icon-info-with-circle")
+                                span  Ticking this box will make the project available to all users
+                        .new-project__form--group
+                            button.new-project__form--btn Create project
+
+            

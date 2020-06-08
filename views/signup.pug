@@ -1,0 +1,50 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		link(href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet")
+		link(rel="stylesheet" href="/css/style.css")
+		link(rel="shortcut icon" type="image/png" href="/img/favicon.ico")
+		title SensIT | Viewer — Your smart asset management app
+	body
+		main.signup-container
+			.signup-form
+				a.logo-box-signup(href="#")
+					img.logo-box-signup__img(src="/img/Logo-SensIT-Color.svg" alt="sensit logo")
+					h1.logo-box-signup__text SensIT
+				h1.signup-heading Create an account
+				form.form-signup
+					.form-signup__group
+						label.form-signup__label(for="name")
+							| Name
+							sup *
+						input#name.form-signup__input(type="text" placeholder="Name LastName" required="")
+					.form-signup__group
+						label.form-signup__label(for="name")
+							| Email address 
+							sup *
+						input#email.form-signup__input(type="email" placeholder="you@example.com" required="")
+					.form-signup__group
+						label.form-signup__label(for="password")
+							| Password 
+							sup *
+						input#password.form-signup__input(type="password" placeholder="••••••••••••" required="" minlength="8")
+						svg#password-icon.password-icon
+							use(xlink:href="/img/sprite.svg#icon-eye")
+					.form-signup__group
+						label.form-signup__label(for="confirm-password")
+							| Confirm password 
+							sup *
+						input#confirm-password.form-signup__input(type="password" placeholder="••••••••••••" required="" minlength="8")
+						svg#confirm-password-icon.password-icon
+							use(xlink:href="/img/sprite.svg#icon-eye")
+					p.signup-comment
+						sup *
+						|   = required field
+					.form-signup__group
+						button.form-signup__btn Create account
+				h3.login-signup
+					| Already a member?
+					a.form-login__link(href="login")    Log in!
+		script(type="text/javascript" src="/js/bundle.js")

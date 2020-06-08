@@ -1,0 +1,25 @@
+extends base
+
+block content
+    .content
+        include _sidebar
+        main.workspace
+            .workspace__header
+                h3#workspace__title.workspace__title Contact us:
+            .panels
+                .panels__contact
+                    .contact__intro
+                        p
+                            | If you have some questions, need help or simply want to give us some feedback, use the form below to contact us.
+                        p  -- the SensIT Team
+                    h2 Contact form
+                    form.contact__form
+                        .contact__form--group
+                            label.contact__form--label(for="subject") Subject
+                            input#subject.contact__form--input(type="text" placeholder="Subject of the message" required="" name="subject")
+                        .contact__form--group
+                            label.contact__form--label(for="message") Message
+                            textarea#message.contact__form--input.message(type="text" placeholder="Content of the message" required="" name="message")
+                        .contact__form--group
+                            button.contact__form--btn Send message
+            

@@ -1,0 +1,250 @@
+extends base
+
+block content
+    .content
+        nav#viewer-sidebar.sidebar__tabs.expand-sidebar
+            #viewer-sidebar__btn.sidebar__tabs--btn
+                svg.sidebar__tabs--btn--icon
+                    use(xlink:href="/img/sprite.svg#icon-chevron-left")
+            #viewer-sidebar__content.sidebar__tabs--content
+                .viewer-tabs
+                    .viewer-tabs__tab.viewer-tabs__tab--active
+                        svg.viewer-tabs__tab--icon
+                            use(xlink:href="/img/sprite.svg#icon-info-with-circle")
+                    .viewer-tabs__tab
+                        svg.viewer-tabs__tab--icon
+                            use(xlink:href="/img/sprite.svg#icon-signal")
+                    .viewer-tabs__tab
+                        svg.viewer-tabs__tab--icon
+                            use(xlink:href="/img/sprite.svg#icon-cloud")
+                    .viewer-tabs__tab
+                        svg.viewer-tabs__tab--icon
+                            use(xlink:href="/img/sprite.svg#icon-line-graph")
+                    .viewer-tabs__tab
+                        svg.viewer-tabs__tab--icon
+                            use(xlink:href="/img/sprite.svg#icon-stats-dots")
+                .viewer-tabs__content.viewer-tabs__content--active
+                    .filetree-wrapper
+                        .filetree#model-filetree
+                            - if (project.bimModel)
+                                button.dir
+                                    i.fa.fa-caret-right
+                                    input.tree-cb(type="checkbox" checked="")
+                                    label.tree-label
+                                        i.fa.fa-folder
+                                        | Project
+                                .indent.hide-indent
+                                    .dir
+                                        input.tree-cb(type="checkbox" checked="")
+                                        label.tree-label
+                                            i.fa.fa-cube
+                                            | Element 01
+                                    button.dir
+                                        i.fa.fa-caret-right
+                                        input.tree-cb(type="checkbox" checked="")
+                                        label.tree-label
+                                            i.fa.fa-folder
+                                            | Group 01
+                                    .indent2.hide-indent
+                                        .dir
+                                            input.tree-cb(type="checkbox" checked="")
+                                            label.tree-label
+                                                i.fa.fa-cube
+                                                | Element 01
+                                        .dir
+                                            input.tree-cb(type="checkbox" checked="")
+                                            label.tree-label
+                                                i.fa.fa-cube
+                                                | Element 02
+                                        .dir
+                                            input.tree-cb(type="checkbox" checked="")
+                                            label.tree-label
+                                                i.fa.fa-cube
+                                                | Element 03
+                                        .dir
+                                            input.tree-cb(type="checkbox" checked="")
+                                            label.tree-label
+                                                i.fa.fa-cube
+                                                | Element 04
+                                    button.dir
+                                        i.fa.fa-caret-right
+                                        input.tree-cb(type="checkbox" checked="")
+                                        label.tree-label
+                                            i.fa.fa-folder
+                                            | Group 02
+                                    .indent2.hide-indent
+                                        .dir
+                                            input.tree-cb(type="checkbox" checked="")
+                                            label.tree-label
+                                                i.fa.fa-cube
+                                                | Element 01
+                                        .dir
+                                            input.tree-cb(type="checkbox" checked="")
+                                            label.tree-label
+                                                i.fa.fa-cube
+                                                | Element 02
+                                        .dir
+                                            input.tree-cb(type="checkbox" checked="")
+                                            label.tree-label
+                                                i.fa.fa-cube
+                                                | Element 03
+                                        .dir
+                                            input.tree-cb(type="checkbox" checked="")
+                                            label.tree-label
+                                                i.fa.fa-cube
+                                                | Element 04
+                    h3.property-menu__heading Element Info
+                    .property-menu
+                        - if (project.bimModel)
+                            .property-menu__item
+                                h4.property-menu__item--key Prop 1
+                                h4.property-menu__item--value Value 1
+                            .property-menu__item
+                                h4.property-menu__item--key Prop 2
+                                h4.property-menu__item--value Value 1
+                            .property-menu__item
+                                h4.property-menu__item--key Prop 3
+                                h4.property-menu__item--value Value 1
+                            .property-menu__item
+                                h4.property-menu__item--key Prop 4
+                                h4.property-menu__item--value Value 1
+
+                .viewer-tabs__content
+                    .filetree-wrapper
+                        .filetree#sensors-filetree
+                            - if (project.sensors)
+                                button.dir
+                                    i.fa.fa-caret-right
+                                    input.tree-cb(type="checkbox" checked="")
+                                    label.tree-label
+                                        i.fa.fa-folder
+                                        | Sensors
+                                .indent.hide-indent#sensor-indent
+                    h3.property-menu__heading Sensor Info
+                    .property-menu#sensor-property-menu
+                        //- .property-menu__item
+                        //-     h4.property-menu__item--key Prop 1
+                        //-     h4.property-menu__item--value Value 1
+                        //- .property-menu__item
+                        //-     h4.property-menu__item--key Prop 2
+                        //-     h4.property-menu__item--value Value 1
+                        //- .property-menu__item
+                        //-     h4.property-menu__item--key Prop 3
+                        //-     h4.property-menu__item--value Value 1
+                        //- .property-menu__item
+                        //-     h4.property-menu__item--key Prop 4
+                        //-     h4.property-menu__item--value Value 1
+                    form.uploadSensors__form
+                        label.uploadSensors__form--btn(for="sensorData-upload")
+                            i.fa.fa-cloud-upload
+                            | Upload sensor data
+                        input#sensorData-upload(type="file")
+                .viewer-tabs__content
+                    .viewerSelect
+                        h2.viewerSelect-heading Select data:
+                        select#select-data.viewerSelect-dropdown(name="select-data")
+                            option(value="selectSensorData" selected="") Select...
+                                //- option(value="Sensor1") Sensor 1
+                                //- option(value="Sensor2") Sensor 2
+                                //- option(value="Sensor3") Sensor 3
+                                //- option(value="Sensor4") Sensor 4
+                                //- option(value="Sensor5") Sensor 5
+                    .viewerSelect
+                        h2.viewerSelect-heading Select file format:
+                        select#select-format.viewerSelect-dropdown(name="select-format")
+                            option(value="selectFileFormat" selected="") Select... 
+                            option(value="txt") &quot;.txt&quot;
+                            option(value="csv") &quot;.csv&quot;
+                            option(value="dat") &quot;.dat&quot;
+                    .viewerSelect
+                        h2.viewerSelect-heading Select delimiter:
+                        select#select-delimiter.viewerSelect-dropdown(name="select-delimiter")
+                            option(value="selectDelimiter" selected="") Select... 
+                            option(value="comma") &quot;,&quot;
+                            option(value="period") &quot;.&quot;
+                            option(value="semicolon") &quot;;&quot;
+                            option(value="tabulator") &quot;/tab&quot;
+                            option(value="space") &quot; &quot;
+                    a#download.download__btn Download
+                .viewer-tabs__content
+                    .plot-data
+                        h2.plot-data--heading Plot sensor data
+                        .sensors
+                            h3.sensors-heading Sensors:
+                            ul#available-sensors.sensors-list
+                            ul#selected-sensors.sensors-list
+                        .select-plottype
+                            h2.select-plottype--heading Plot type:
+                            select#select-plottype.select-plottype--dropdown(name="select-plottype")
+                                option(value="selectParams" selected="") Select plot type... 
+                                option(value="line") Line Plot
+                                option(value="scatter") Scatter Plot
+                                option(value="bar") Bar Plot
+                        button.plot__btn Plot
+                    .visualization
+                        .visualize
+                            h2.visualize-heading Visualize parameters
+                            .visualize-options
+                                .visualize-options__item
+                                    h3.visualize-options__item--heading Parameters:
+                                    select#select-params.visualize-options__item--dropdown(name="select-params")
+                                        option(value="selectParams" selected="") Select parameter... 
+                                        option(value="defs") Deflection
+                                        option(value="cracks") Cracks
+                                        option(value="strains") Strains
+                                        option(value="temps") Temperature
+                                .visualize-options__item
+                                    h3.visualize-options__item--heading Range:
+                                    .visualize-options__item--radio
+                                        input#allTimes(type="radio" name="range" value="allTimes" checked="checked")
+                                        label(for="allTimes") All
+                                    .visualize-options__item--radio
+                                        input#timeRange(type="radio" name="range" value="timeRange")
+                                        label(for="timeRange")
+                                            .timeRangeRow
+                                                label(for="fromDate") From:
+                                                input#fromDate(type="date" name="fromDate" min="1975-01-01" disabled="")
+                                            .timeRangeRow
+                                                label(for="toDate") To:
+                                                input#toDate(type="date" name="toDate" disabled="")
+                        button.visualize__btn Visualize
+                .viewer-tabs__content
+                    p.in-progress-message
+                        | The predictive functionality is currently unavailable but we are working hard on it to
+                        | offer
+                        | you an even better user experience.
+        .wrapper
+            #plot-container.plot-container.hide-plot
+                .plot-area
+                    canvas#myPlot
+                .plot-controls
+                    #back--btn.plot-controls--item
+                        svg.plot-controls--icon
+                            use(xlink:href="/img/sprite.svg#icon-chevron-left")
+                    #play--btn.plot-controls--item
+                        svg.plot-controls--icon
+                            use(xlink:href="/img/sprite.svg#icon-triangle-right")
+                    #forward--btn.plot-controls--item
+                        svg.plot-controls--icon
+                            use(xlink:href="/img/sprite.svg#icon-chevron-right")
+                    input#timeSteps(type="range" name="timeSteps" min="0" max="100" step="1")
+                .plot-close--btn
+                    svg.plot-close--icon
+                        use(xlink:href="/img/sprite.svg#icon-circle-with-cross")
+            - const projectProps = {id: project.id, bimModel: project.bimModel, sensors:project.sensors}
+            .canvas-container(data-sensit-project=`${JSON.stringify(projectProps)}`)
+                - if (!project.bimModel)
+                    form.uploadModel__form
+                        .uploadModel__form--label(for="bimModel") No model has been uploaded yet
+                        .uploadModel__form--input.uploadModel__file-upload
+                            label.uploadModel__form--upload-btn(for="bimModel-upload") Select file
+                            input#bimModel-upload(type="file" )
+                            //- accept="image/*"
+                            span#bimModel-name  No file selected
+                        button.uploadModel__form--btn Upload Model
+                - if (project.bimModel)
+                    #visualization-close--btn.hide-btn Close visualization
+                    svg.spinner.spinner--steps
+                        use(xlink:href="/img/sprite.svg#icon-spinner6")
+                    canvas#model-canvas
+                    #scene-frame

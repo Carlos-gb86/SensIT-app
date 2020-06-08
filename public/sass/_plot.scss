@@ -1,0 +1,109 @@
+
+/*---------------------------------------------------------------- */
+/* PLOTS */
+/*---------------------------------------------------------------- */
+
+.plot-container {
+    background-color: lightslategray;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    max-height: 60%;
+    flex: 3 1;
+    transition: all 0.3s ease-in;
+}
+
+.plot-area {
+    margin: 1rem 1rem 0 1rem; 
+    width: 95%;
+    min-height: 80%;
+    flex: 0 1;
+    display: flex;
+    justify-content: space-around;
+    border: none;
+    position: relative;
+}
+
+#myPlot {
+    background-color: var(--color-grey-light-1);
+    height: 100% !important;
+    border: 1px solid #333;
+}
+
+.hide-plot {
+    display: none;
+}
+
+.plot-controls {
+    width: 32rem;
+    background-color: var(--color-grey-dark-2);
+    height: 3rem;
+    margin: auto;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+        &--item {
+            background-color: var(--color-grey-light-4);
+            width: 2.7rem;
+            height: 2.7rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            cursor: pointer;
+
+            &:nth-child(2) {
+                height: 4rem;
+                width: 4rem;
+
+                & .plot-controls--icon {
+                    height: 3rem;
+                    width: 3rem;
+                }
+            }
+
+            &:hover {
+                background-color: var(--color-primary);
+            }
+        }
+
+        &--icon {
+            height: 2rem;
+            width: 2rem;
+            fill: white;
+        }
+}
+
+#timeSteps {
+    width: 18rem;
+}
+
+.plot-close {
+
+    &--btn {
+        position: absolute;
+        top: 1.5rem;
+        right: 3rem;
+        height: 3rem;
+        width: 3rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    &--icon {
+        height: 2.5rem;
+        width: 2.5rem;
+        fill: red;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

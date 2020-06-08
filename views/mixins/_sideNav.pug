@@ -1,0 +1,6 @@
+mixin sideNav(label, icon, path)
+    li.side-nav__item
+        a.side-nav__link(href=`${path}`)
+            svg.side-nav__icon
+                use(xlink:href=`/img/sprite.svg#icon-${icon}`)
+            span.side-nav__text= label

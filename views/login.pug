@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet")
+        link(rel="stylesheet" href="/css/style.css")
+        link(rel="shortcut icon" type="image/png" href="/img/favicon.ico")
+        title SensIT | Login
+    body
+        main.login-container
+            .login-form
+                a.logo-box-login(href="/manager")
+                    img.logo-box-login__img(src="/img/Logo-SensIT-Color.svg" alt="sensit logo")
+                    h1.logo-box-login__text SensIT
+                h1.login-heading Log in to your account
+                form.form-login
+                    .form-login__group
+                        label.form-login__label(for="email") Email address
+                        input#email.form-login__input(type="email" placeholder="you@example.com" required="")
+                    .form-login__group
+                        label.form-login__label(for="password") Password
+                        input#password.form-login__input(type="password" placeholder="••••••••••••" required="" minlength="8")
+                        svg(id='password-icon' class='password-icon')
+                            use(xlink:href="/img/sprite.svg#icon-eye")
+                    .form-login__group
+                        button.form-login__btn Login
+                        a.form-login__link(href="/forgotPassword") Forgot your password?
+                h3.login-signup
+                    | Don't have an account yet?
+                    a.form-login__link(href="/signup")    Sign up!
+        script(type="text/javascript" src="./js/bundle.js")
+        script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js")

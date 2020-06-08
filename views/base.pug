@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet")
+        link(href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css" rel="stylesheet")
+        link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" )
+        link(rel="stylesheet" href="/css/style.css")
+        link(rel="shortcut icon" type="image/png" href="/img/favicon.ico")
+        title SensIT | Viewer — Your smart asset management app
+    body
+        .container
+            // HEADER
+            include _header
+
+            // CONTENT
+            block content
+
+            // MODAL USER SEARCH
+            include _userSearch
+            
+            // FOOTER
+            include _footer
+        script(src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js" samesite="None" secure="")
+        script(type="text/javascript" src="/js/bundle.js")

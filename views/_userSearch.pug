@@ -1,0 +1,10 @@
+#user-search.user-modal
+    svg.user-modal__close-btn
+        use(xlink:href="/img/sprite.svg#icon-cross")
+    h2.user-modal__heading Search users
+    form#user-search__form.user-search(action="#")
+        input.user-search__input(type="text" placeholder="Search user...")
+        button.user-search__button
+            svg.user-search__icon
+                use(xlink:href="/img/sprite.svg#icon-magnifying-glass")
+    .user-list

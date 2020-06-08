@@ -1,0 +1,46 @@
+extends base
+
+include mixins/_sideNav
+
+block content
+    .content
+        include _sidebar
+        main.workspace
+            .workspace__header
+                h3#workspace__title.workspace__title My account:
+            .panels
+                .panels__user
+                    .panels__user-tabs
+                        a(href="/profile")#profile-tab.user-tab.user-tab--active  
+                            h2 PROFILE 
+                        a(href="/settings")#settings-tab.user-tab  
+                            h2 SETTINGS 
+                    .profile
+                        form.profile__form
+                            figure.profile__photo
+                                img.profile__photo--img(src=`/img/users/${user.photo}` alt="user profile photo")
+                                //figcaption.profile__photo--caption
+                                input.form__upload(type="file", accept="image/*", id="photo" name="photo", style="display: none;")
+                                label.profile__photo--caption(for="photo")
+                                    | Change photo
+                            .profile__form--group
+                                label.profile__form--label(for="name") Name
+                                input#name.profile__form--input(type="text" value=`${user.name}` required="" name="name")
+                            .profile__form--group
+                                label.profile__form--label(for="email") Email address
+                                input#email.profile__form--input(type="email" value=`${user.email}` required="" name="email")
+                            .profile__form--group
+                                label.profile__form--label(for="company") Company
+                                - if (user.company)
+                                    input#company.profile__form--input(type="text" value=`${user.company}` name="company")
+                                - if (!user.company)
+                                    input#company.profile__form--input(type="text" value="" name="company")
+                            .profile__form--group
+                                label.profile__form--label(for="position") Position
+                                - if (user.position)
+                                    input#position.profile__form--input(type="text" value=`${user.position}`  name="position")
+                                - if (!user.position)
+                                    input#position.profile__form--input(type="text" value=""  name="position")
+                            .profile__form--group
+                                button.profile__form--btn Save changes
+            

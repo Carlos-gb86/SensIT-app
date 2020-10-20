@@ -104,6 +104,7 @@ const forwardBtn = document.getElementById('forward--btn');
 var interval;
 var activePlot;
 var sensorData;
+var contourData;
 
 const signupForm = document.querySelector('.form-signup');
 const loginForm = document.querySelector('.form-login');
@@ -202,7 +203,7 @@ if (bimContainer) {
   project = JSON.parse(bimContainer.dataset.sensitProject);
 
   if (project.sensors.length > 0) {
-    sensorDataPath = project.sensors[0].path;
+    sensorDataPath = project.sensors[0].filename;
   }
 }
 
@@ -221,11 +222,11 @@ if (bimContainer) {
 
 if (visualizeBtn) {
   visualizeBtn.addEventListener('click', () => {
-    const file = '/contour-plots/sensitBeam4.json';
+    //const file = '/contour-plots/lillaEdetTest.json';
     const paramInput = document.getElementById('select-params').value;
     const param = paramInput === 'selectParams' ? 'cracks' : paramInput;
     document.querySelector('.spinner').classList.remove('hide-spinner');
-    runBIM(project.bimModel, file, param);
+    runBIM(project.bimModel, contourData, param);
     visualizeCloseBtn.classList.remove('hide-btn');
   });
 }
@@ -259,8 +260,11 @@ if (availableSensors) {
 /* If Path is defined, then import Sensor Data */
 
 if (sensorDataPath) {
-  importData(sensorDataPath).then((data) => {
+  importData(sensorDataPath, 'sensor').then((data) => {
     sensorData = data;
+  });
+  importData(sensorDataPath, 'contour').then((data) => {
+    contourData = data;
   });
 }
 

@@ -79,6 +79,21 @@ export const runBIM = (filename, contourFile, param) => {
 
     manager.onLoad = function () {
       document.querySelector('.spinner').classList.add('hide-spinner');
+      if (contourFile) {
+        // Adding contour
+        lut = new Lut();
+
+        settings = {
+          colorMap: 'rainbow',
+          timeStep: 0,
+          contour: param,
+          maxVal: 1,
+          minVal: 0,
+        };
+
+        loadContour();
+      }
+
       centerModel(scene.children[1]);
     };
 
@@ -87,6 +102,7 @@ export const runBIM = (filename, contourFile, param) => {
 
     var centerModel = (modelObj) => {
       var bbox = new THREE.Box3().setFromObject(modelObj);
+
       var sphere = new THREE.Sphere();
       var sph = bbox.getBoundingSphere(sphere);
 
@@ -105,7 +121,11 @@ export const runBIM = (filename, contourFile, param) => {
 
     // Adding help grid
     var createGrid = (bbox) => {
-      var grid = new THREE.GridHelper(5, 25, 0x000000, 0x000000);
+      var maxSize = Math.max(
+        Math.max(bbox.max.x, -1 * bbox.min.x),
+        Math.max(bbox.max.z, -1 * bbox.min.z)
+      );
+      var grid = new THREE.GridHelper(maxSize + 1, 25, 0x000000, 0x000000);
       grid.geometry.translate(
         0.5 * (bbox.min.x + bbox.max.x),
         0,
@@ -115,58 +135,77 @@ export const runBIM = (filename, contourFile, param) => {
       grid.material.transparent = true;
       scene.add(grid);
     };
-
-    if (contourFile) {
-      // Adding contour
-      lut = new Lut();
-
-      settings = {
-        colorMap: 'rainbow',
-        timeStep: 0,
-        contour: param,
-        maxVal: 1,
-        minVal: 0,
-      };
-
-      loadContour();
-    }
   }
 
   function loadContour() {
     var loader = new THREE.BufferGeometryLoader();
-    loader.load(contourFile, function (geometry) {
-      geometry.computeVertexNormals();
 
-      // default color attribute
-      var colors = [];
-      for (var i = 0, n = geometry.attributes.position.count; i < n; ++i) {
-        colors.push(1, 1, 1);
-      }
-      geometry.setAttribute(
-        'color',
-        new THREE.Float32BufferAttribute(colors, 3)
-      );
+    var geometry = loader.parse(contourFile);
+    //geometry.center();
+    geometry.computeVertexNormals();
 
-      mesh = new THREE.Mesh(
-        geometry,
-        new THREE.MeshLambertMaterial({
-          side: THREE.DoubleSide,
-          color: 0xf5f5f5,
-          vertexColors: true,
-        })
-      );
+    // default color attribute
+    var colors = [];
+    for (var i = 0, n = geometry.attributes.position.count; i < n; ++i) {
+      colors.push(1, 1, 1);
+    }
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
-      var contour = geometry.userData[settings.contour];
+    mesh = new THREE.Mesh(
+      geometry,
+      new THREE.MeshLambertMaterial({
+        side: THREE.DoubleSide,
+        color: 0xf5f5f5,
+        vertexColors: true,
+      })
+    );
 
-      updateMinMaxValues(contour, settings);
+    var contour = geometry.userData[settings.contour];
 
-      createGUIPanel(geometry);
+    updateMinMaxValues(contour, settings);
 
-      updateColors();
+    createGUIPanel(geometry);
 
-      scene.add(mesh);
-    });
+    updateColors();
+
+    scene.add(mesh);
   }
+
+  // function loadContour() {
+  //   var loader = new THREE.BufferGeometryLoader();
+  //   loader.load(contourFile, function (geometry) {
+  //     geometry.computeVertexNormals();
+
+  //     // default color attribute
+  //     var colors = [];
+  //     for (var i = 0, n = geometry.attributes.position.count; i < n; ++i) {
+  //       colors.push(1, 1, 1);
+  //     }
+  //     geometry.setAttribute(
+  //       'color',
+  //       new THREE.Float32BufferAttribute(colors, 3)
+  //     );
+
+  //     mesh = new THREE.Mesh(
+  //       geometry,
+  //       new THREE.MeshLambertMaterial({
+  //         side: THREE.DoubleSide,
+  //         color: 0xf5f5f5,
+  //         vertexColors: true,
+  //       })
+  //     );
+
+  //     var contour = geometry.userData[settings.contour];
+
+  //     updateMinMaxValues(contour, settings);
+
+  //     createGUIPanel(geometry);
+
+  //     updateColors();
+
+  //     scene.add(mesh);
+  //   });
+  // }
 
   function updateColors() {
     var geometry = mesh.geometry;

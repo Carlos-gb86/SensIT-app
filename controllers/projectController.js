@@ -1,6 +1,7 @@
-const fs = require('fs');
+//const fs = require('fs');
 const multer = require('multer');
 const sharp = require('sharp');
+const Client = require('ftp');
 const Project = require('../models/projectModel');
 //const User = require('../models/userModel');
 const factory = require('./handlerFactory');
@@ -127,17 +128,60 @@ exports.parseSensorData = (req, res, next) => {
   next();
 };
 
-exports.loadSensorData = async (req, res, next) => {
-  const { path } = req.body;
+exports.loadData = async (req, res, next) => {
+  const { name, type } = req.body;
 
-  const fileContent = await JSON.parse(fs.readFileSync(path, 'utf-8'));
+  let folder;
+  let file;
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: fileContent,
-    },
-  });
+  if (type === 'sensor') {
+    folder = 'database/sensors';
+    file = `${name}-sensor.json`;
+  } else {
+    folder = 'database/contours';
+    file = `${name}-contour.json`;
+  }
+
+  const emptyString = '';
+
+  const getFileFTP = async (contentString, folder, file) => {
+    const c = new Client();
+
+    c.connect({
+      host: 'ftp.thesensitproject.com',
+      user: 'thesensitproject.com',
+      password: 'Sensit123',
+    });
+
+    c.on('ready', function () {
+      c.cwd(folder, function (err1) {
+        if (err1) throw err1;
+
+        c.get(file, function (err2, stream) {
+          if (err2) throw err2;
+
+          stream.on('data', function (chunk) {
+            contentString += chunk.toString();
+          });
+
+          stream.on('end', function () {
+            // content variable now contains all file content.
+            const fileContent = JSON.parse(contentString, 'utf-8');
+            //const fileContent = await JSON.parse(fs.readFileSync(path, 'utf-8'));
+
+            res.status(200).json({
+              status: 'success',
+              data: {
+                data: fileContent,
+              },
+            });
+          });
+        });
+      });
+    });
+  };
+
+  getFileFTP(emptyString, folder, file);
 };
 
 exports.getAllProjects = factory.getAll(Project);

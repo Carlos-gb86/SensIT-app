@@ -3,7 +3,7 @@ import axios from 'axios';
 import { showAlert } from './alert';
 const moment = require('moment');
 
-export const importData = async (path) => {
+export const importData = async (filename, type) => {
   // var timeArray = new Array(moment().format('YYYY-MM-DD HH:mm:ss'));
   // let count = 1;
   // while (timeArray.length < 212) {
@@ -13,14 +13,15 @@ export const importData = async (path) => {
   //   count += 1;
   // }
 
-  const url = `/api/v1/projects/getSensorData/`;
+  const url = `/api/v1/projects/getData/`;
 
   try {
     const res = await axios({
       method: 'POST',
       url,
       data: {
-        path,
+        name: filename,
+        type,
       },
     });
 

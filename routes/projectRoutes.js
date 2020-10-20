@@ -20,7 +20,7 @@ router
     projectController.createProject
   );
 
-router.post('/getSensorData', projectController.loadSensorData);
+router.post('/getData', projectController.loadData);
 
 router.patch(
   '/uploadBimModelFile/:id',

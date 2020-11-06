@@ -83,6 +83,8 @@ export const runBIM = (filename, contourFile, param) => {
         // Adding contour
         lut = new Lut();
 
+        console.log(param);
+
         settings = {
           colorMap: 'rainbow',
           timeStep: 0,
@@ -250,7 +252,7 @@ export const runBIM = (filename, contourFile, param) => {
       });
 
     folder
-      .add(settings, 'contour', ['strains', 'cracks', 'defs'])
+      .add(settings, 'contour', ['strains', 'cracks', 'defs', 'temps'])
       .onChange(function (newContour) {
         var contour = geometry.userData[newContour];
         updateMinMaxValues(contour, settings);
@@ -310,9 +312,11 @@ const updateMinMaxValues = (contour, settings) => {
 
   var maxVal = settings.maxVal;
   var minVal = settings.minVal;
-  settings.lb = 0.2 * (maxVal - minVal);
-  settings.ub = 1.2 * (maxVal - minVal);
-  settings.stepVal = (maxVal - minVal) / 20;
+  var step = Math.pow(10,Math.ceil(Math.log10(maxVal)))/100;
+  settings.lb =  Math.ceil(minVal/step)*step;
+  settings.ub = Math.floor(maxVal/step)*step;
+  settings.stepVal = step;
+  console.log(step, settings.lb, settings.ub);
 };
 
 const getMaxMinofMatrix = (matrix, flag) => {

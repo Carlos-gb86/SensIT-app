@@ -55635,6 +55635,7 @@ var runBIM = function runBIM(filename, contourFile, param) {
       if (contourFile) {
         // Adding contour
         lut = new _Lut.Lut();
+        console.log(param);
         settings = {
           colorMap: 'rainbow',
           timeStep: 0,
@@ -55764,7 +55765,7 @@ var runBIM = function runBIM(filename, contourFile, param) {
     folder.add(settings, 'colorMap', ['rainbow', 'cooltowarm', 'blackbody', 'grayscale']).onChange(function () {
       updateColors();
     });
-    folder.add(settings, 'contour', ['strains', 'cracks', 'defs']).onChange(function (newContour) {
+    folder.add(settings, 'contour', ['strains', 'cracks', 'defs', 'temps']).onChange(function (newContour) {
       var contour = geometry.userData[newContour];
       updateMinMaxValues(contour, settings);
       folder.__controllers[3].__step = settings.stepVal;
@@ -55816,9 +55817,13 @@ var updateMinMaxValues = function updateMinMaxValues(contour, settings) {
   settings.minVal = Math.max(getMaxMinofMatrix(contour, 'min'), 0);
   var maxVal = settings.maxVal;
   var minVal = settings.minVal;
-  settings.lb = 0.2 * (maxVal - minVal);
-  settings.ub = 1.2 * (maxVal - minVal);
-  settings.stepVal = (maxVal - minVal) / 20;
+  var step = Math.pow(10, Math.ceil(Math.log10(maxVal))) / 100;
+  settings.lb = Math.ceil(minVal / step) * step;
+  settings.ub = Math.floor(maxVal / step) * step;
+  settings.stepVal = step;
+  console.log(step, settings.lb, settings.ub); //settings.lb = 0.2 * (maxVal - minVal);
+  //settings.ub = 1.2 * (maxVal - minVal);
+  //settings.stepVal = (maxVal - minVal) / 20;
 };
 
 var getMaxMinofMatrix = function getMaxMinofMatrix(matrix, flag) {
@@ -78832,7 +78837,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58176" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57798" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

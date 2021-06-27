@@ -32,7 +32,7 @@ import { runBIM } from './bimviewer/bimModelViewer';
 import { importData } from './readFile';
 import { plotData, updateTimeSlider, onPlotControlsClick } from './plotData';
 import { signup } from './signup';
-import { login, logout } from './login';
+import { login, guestLogin, logout } from './login';
 import { updateData } from './updateData';
 import { forgotPassword } from './forgotPassword';
 import { resetPassword } from './resetPassword';
@@ -108,6 +108,7 @@ var contourData;
 
 const signupForm = document.querySelector('.form-signup');
 const loginForm = document.querySelector('.form-login');
+const guestLoginBtn = document.querySelector('.guest');
 const forgotPasswordForm = document.querySelector('.form-forgot');
 const logoutBtn = document.getElementById('logout-btn');
 
@@ -311,6 +312,9 @@ if (signupForm) signup(signupForm);
 
 /* Log into the app */
 if (loginForm) login(loginForm);
+
+/* Log into the app as guest */
+if (guestLoginBtn) guestLogin(guestLoginBtn);
 
 /* Log into the app */
 if (forgotPasswordForm) forgotPassword(forgotPasswordForm);

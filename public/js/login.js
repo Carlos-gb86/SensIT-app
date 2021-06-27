@@ -31,6 +31,34 @@ export const login = (form) => {
   });
 };
 
+export const guestLogin = (btn) => {
+  btn.addEventListener('click', async() => {
+
+    const email = 'guest@sensit.com';
+    const password = 'test1234';
+
+    try {
+      const res = await axios({
+        method: 'POST',
+        url: '/api/v1/users/login',
+        data: {
+          email,
+          password,
+        },
+      });
+
+      if (res.data.status === 'success') {
+        showAlert('success', 'Logged in successfully!', 'checkmark');
+        window.setTimeout(() => {
+          location.assign('/');
+        }, 1500);
+      }
+    } catch (err) {
+      showAlert('error', err.response.data.message, 'cancel');
+    }
+  });
+};
+
 export const logout = (btn) => {
   btn.addEventListener('click', async (e) => {
     if (e.target.closest('a') === btn) {

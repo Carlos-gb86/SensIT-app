@@ -9,9 +9,12 @@ export const plotData = async (
   canvas,
   timeSlider
 ) => {
+  
+  
   if (selectedSensor) {
+    
     const obj = getData(data, sensors, selectedSensor);
-
+    
     const sensor = obj.sensor;
     const sensorData = obj.sensorData;
 
@@ -106,13 +109,13 @@ const getData = (AllSensorData, sensors, selectedSensor) => {
 
   let sensor;
   let sensorData;
-
+  
   sensors.forEach((sensorItem) => {
     if (sensorId === sensorItem.id) {
       sensor = sensorItem;
     }
   });
-
+  
   AllSensorData.forEach((sensorItem) => {
     if (sensorId === sensorItem.id) {
       sensorData = sensorItem;

@@ -83,8 +83,6 @@ export const runBIM = (filename, contourFile, param) => {
         // Adding contour
         lut = new Lut();
 
-        console.log(param);
-
         settings = {
           colorMap: 'rainbow',
           timeStep: 0,

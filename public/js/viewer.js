@@ -146,7 +146,7 @@ export const addRemoveSensor = (
   activePlot
 ) => {
   const btn = event.target.closest('.sensors-item--btn');
-
+  
   if (btn) {
     const item = event.target.closest('.sensors-item');
     const list = item.parentNode;

@@ -202,7 +202,7 @@ if (toDate) setMaxDateToToday(toDate);
 /* Define global varibles */
 if (bimContainer) {
   project = JSON.parse(bimContainer.dataset.sensitProject);
-
+  
   if (project.sensors.length > 0) {
     sensorDataPath = project.sensors[0].filename;
   }
@@ -219,6 +219,7 @@ if (bimContainer) {
   }
 
   if (project.bimModel) runBIM(project.bimModel);
+  
 }
 
 if (visualizeBtn) {
@@ -259,7 +260,6 @@ if (availableSensors) {
 }
 
 /* If Path is defined, then import Sensor Data */
-
 if (sensorDataPath) {
   importData(sensorDataPath, 'sensor').then((data) => {
     sensorData = data;

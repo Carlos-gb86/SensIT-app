@@ -28,12 +28,13 @@ export const importData = async (filename, type) => {
     const rawData = res.data.data.data;
 
     if (res.data.status === 'success') {
-      showAlert('success', `Sensor data loaded successfully!`, 'checkmark');
+      let msg = type.charAt(0).toUpperCase() + type.slice(1) + ' data loaded successfully!';
+      showAlert('success', msg, 'checkmark');
       return rawData;
     }
   } catch (err) {
     showAlert('error', err.response.data.message, 'cancel');
-    //console.log(err);
+    
   }
 
   // Object.keys(sensorData).forEach((key) => {

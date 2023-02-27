@@ -218,8 +218,14 @@ export const runBIM = (filename, contourFile, param) => {
     lut.setMax(settings.maxVal);
     lut.setMin(0);
 
-    for (var i = 0; i < contour[timeStep].length; i++) {
-      var colorValue = Math.round(contour[timeStep][i] * 100) / 100;
+    if (Array.isArray(contour[0])) {
+      var stepContour = contour[timeStep];
+    } else {
+      var stepContour = contour;
+    }
+    
+    for (var i = 0; i < stepContour.length; i++) {
+      var colorValue = Math.round(stepContour[i] * 100) / 100;
       var color = lut.getColor(colorValue);
       if (color === undefined) {
         console.log('Unable to determine color for value:', colorValue);
@@ -259,8 +265,13 @@ export const runBIM = (filename, contourFile, param) => {
         folder.__controllers[3].__max = settings.ub;
         updateColors();
       });
-
-    var maxStep = mesh.geometry.userData[settings.contour].length - 1;
+    
+      if (Array.isArray(settings.contour[0])) {
+        var maxStep = mesh.geometry.userData[settings.contour].length - 1;
+      } else {
+        var maxStep = 0;
+      }
+    
 
     folder
       .add(settings, 'timeStep', 0, maxStep, 1)
@@ -314,20 +325,15 @@ const updateMinMaxValues = (contour, settings) => {
   settings.lb =  Math.ceil(minVal/step)*step;
   settings.ub = Math.floor(maxVal/step)*step;
   settings.stepVal = step;
-  console.log(step, settings.lb, settings.ub);
+  console.log("step:",step, "lower_bound:", settings.lb, "upper_bound:", settings.ub);
 };
 
 const getMaxMinofMatrix = (matrix, flag) => {
-  if (flag === 'max') {
-    var maxofRow = matrix.map((row) => {
-      return Math.max(...row);
-    });
-    return Math.max(...maxofRow);
+  var flat = matrix.flat()
+  if (flag === 'max') { 
+    return Math.max(...flat);
   }
   if (flag === 'min') {
-    var minofRow = matrix.map((row) => {
-      return Math.min(...row);
-    });
-    return Math.min(...minofRow);
+    return Math.min(...flat);
   }
 };

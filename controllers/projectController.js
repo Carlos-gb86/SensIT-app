@@ -144,6 +144,7 @@ exports.loadData = async (req, res, next) => {
 
   const emptyString = '';
 
+  // eslint-disable-next-line no-shadow
   const getFileFTP = async (contentString, folder, file) => {
     const c = new Client();
 
